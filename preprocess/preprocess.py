@@ -127,7 +127,7 @@ def make_node2id_eng_text(dataset_name, remove_StopWord=False):
             freq_stop+=1
     print('freq_stop num',freq_stop)
 
-    ent2id_new = json.load(open('./pretrained_emb/NELL_KG/ent2ids_refined', 'r'))
+    ent2id_new = json.load(open('./Pretrained_Emb/NELL_KG/ent2ids_refined', 'r'))
     adj_ent_index = []
     query_nodes = []
     tag_set = set()
@@ -223,7 +223,7 @@ def make_node2id_eng_text(dataset_name, remove_StopWord=False):
     json.dump([adj_ent_index, ent_mapping],
               open('./{}_data/index_and_mapping.json'.format(dataset_name), 'w'), ensure_ascii=False)
     ent_emb = []
-    TransE_emb_file = np.loadtxt('./pretrained_emb/NELL_KG/entity2vec.TransE')
+    TransE_emb_file = np.loadtxt('./Pretrained_Emb/NELL_KG/entity2vec.TransE')
     TransE_emb = []
 
     for i in range(len(TransE_emb_file)):
@@ -293,8 +293,8 @@ def make_node2id_eng_text(dataset_name, remove_StopWord=False):
               ensure_ascii=False)
     json.dump(word_nodes, open('./{}_data/word_id2_list.json'.format(dataset_name), 'w'), ensure_ascii=False)
 
-    glove_emb = pkl.load(open('./pretrained_emb/old_glove_6B/embedding_glove.p', 'rb'))
-    vocab = pkl.load(open('./pretrained_emb/old_glove_6B/vocab.pkl', 'rb'))
+    glove_emb = pkl.load(open('./Pretrained_Emb/old_glove_6B/embedding_glove.p', 'rb'))
+    vocab = pkl.load(open('./Pretrained_Emb/old_glove_6B/vocab.pkl', 'rb'))
     embs = []
     err_count = 0
     for word in word_nodes:
@@ -307,8 +307,8 @@ def make_node2id_eng_text(dataset_name, remove_StopWord=False):
     print('err in word count', err_count)
     pkl.dump(np.array(embs, dtype=np.float64), open('./{}_data/word_emb.pkl'.format(dataset_name), 'wb'))
 
-dataset_name='snippets'
-if dataset_name in ['mr', 'snippets', 'tagmynews']:
+dataset_name='olidv2'
+if dataset_name in ['mr', 'snippets', 'tagmynews', 'olidv2']:
     remove_StopWord = True
 else:
     remove_StopWord = False
